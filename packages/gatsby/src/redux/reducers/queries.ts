@@ -397,9 +397,7 @@ function assertCorrectWorkerState({
   }
   for (const query of queryStateChunk.trackedQueries.values()) {
     if (query.dirty) {
-      throw new Error(
-        `Assertion failed: all worker queries are not dirty (worker #${workerId})`
-      )
+      throw new Error(`Assertion failed: all worker queries are not dirty (worker #${workerId})\n${require(`util`).inspect(queryStateChunk, { depth: Infinity })}`);
     }
     if (query.running) {
       throw new Error(
